@@ -1,41 +1,71 @@
-/*Given a number write a function to return the sum of all digits to the main program*/
+/*Given a number find out whether the number is divisible by 11 or not*/
 
 #include<stdio.h>
+#include<stdbool.h>
+#define ASCII_VALUE_DIGIT 48
 
-void getInputNumber(char number[]){
-	printf("\t\tEnter the number:\n\t\t");
-	scanf("%s", number);
+void getInputNumber(char num[]){
+	printf("\t\tEnter the Number to check it's divisibility by 11\n\t\t");
+	scanf("%s", num);
 	return;
-} 
-
-void getParsedNumber(char number[], char dup[]){
-	int len = 0;
-	for (int index = 0; number[index] != '\0'; index++){
-		if (number[index] > 47 && number[index] < 58){
-			dup[len] = number[index];
-			len++;
-		}
-	}
 }
 
-int myAtoI(char ele){
-	return (ele - 48);
+bool isNumberNegative(char num[]){
+	if (num[0] == '-')
+		return true;
+	else
+		return false;
 }
 
-int getSumOfDigits(char *number){
+void getParsedNumber(char num[]){
+	int i;
+	for (i = 0; num[i] != '\0'; i++)
+		num[i] = num[i + 1];
+	num[i] = '\0';
+	return;
+}
+
+int myAtoI(char num){
+	return (num - 48);
+}
+
+int getEvenPosSum(char num[]){
 	int sum = 0;
-	char parsedNumber[10] = { '\0' };
-	getParsedNumber(number, parsedNumber);
-	for (int index = 0; parsedNumber[index] != '\0'; index++)
-		sum += myAtoI(parsedNumber[index]);
+	int i;
+	for (i = 1; num[i] = '\0'; i += 2)
+		sum += myAtoI(num[i]);
 	return sum;
 }
 
-int main() {
-	char number[10] = { '\0' };//Number can be any of positive real number or negative real number
+int getOddPosSum(char num[]){
 	int sum = 0;
+	int i;
+	for (i = 0; num[i] = '\0'; i += 2)
+		sum += myAtoI(num[i]);
+	return sum;
+}
+
+int isDivisibleBy11(char num[]){
+	int evenPosSum = 0;
+	int oddPosSum = 0;
+	int sum = 0;
+	if (isNumberNegative(num))
+		getParsedNumber(num);
+	evenPosSum = getEvenPosSum(num);
+	oddPosSum = getOddPosSum(num);
+	sum = (evenPosSum - oddPosSum);
+	if (sum == 0 || sum == 11)
+		return 1;
+	else
+		return 0;
+}
+
+
+int main(){
+	char number[10] = { '\0' }; //Considering negative as well as positive numbers
 	getInputNumber(number);
-	//printf("%s", number);
-	sum = getSumOfDigits(number);
-	printf("\t\tThe sum of the given numner %s is %d", number, sum);
+	if (isDivisibleBy11(number) == 1)
+		printf("\t\tThe given number is divisible by 11");
+	else
+		printf("\t\tThe given number is not divisible by 11");
 }
