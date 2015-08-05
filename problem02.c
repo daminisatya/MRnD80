@@ -5,7 +5,7 @@
 #define ASCII_VALUE_DIGIT 48
 
 void getInputNumber(char num[]){
-	printf("\t\tEnter the Number to check it's divisibility by 11\n\t\t");
+	printf("\t\tEnter the number to check it's divisibility by 11\n\t\t");
 	scanf("%s", num);
 	return;
 }
@@ -45,7 +45,7 @@ int getOddPosSum(char num[]){
 	return sum;
 }
 
-int isDivisibleBy11(char num[]){
+int isDivisibleBy11(char *num){
 	int evenPosSum = 0;
 	int oddPosSum = 0;
 	int sum = 0;
@@ -54,7 +54,7 @@ int isDivisibleBy11(char num[]){
 	evenPosSum = getEvenPosSum(num);
 	oddPosSum = getOddPosSum(num);
 	sum = (evenPosSum - oddPosSum);
-	if (sum == 0 || sum == 11)
+	if (sum % 11 == 0)
 		return 1;
 	else
 		return 0;
